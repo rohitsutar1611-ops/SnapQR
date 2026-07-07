@@ -1,0 +1,1 @@
+console.log("SnapQR script loaded successfully.");
