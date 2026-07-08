@@ -1,146 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnapQR</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block title %}
+SnapQR
+{% endblock %}
 
+{% block content %}
 
-</head>
+<section class="max-w-7xl mx-auto px-6 py-20">
 
-<body>
-    {% extends "base.html" %}
+    <div class="text-center">
 
-    {% block title %}
+        <h1 class="text-6xl font-bold text-slate-800">
+            Generate QR Codes for Images
+        </h1>
 
-    SnapQR
+        <p class="text-xl text-gray-500 mt-6">
+            Upload your image and get a permanent QR Code instantly.
+        </p>
 
-    {% endblock %}
+    </div>
 
-    {% block content %}
+</section>
 
-    <section class="max-w-7xl mx-auto px-6 py-20">
+<section class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto px-6">
 
-        <div class="text-center">
+    <div class="bg-white rounded-xl shadow p-8">
 
-            <h1 class="text-6xl font-bold text-slate-800">
+        <h2 class="text-2xl font-semibold">
+            ⚡ Instant QR
+        </h2>
 
-                Generate QR Codes
+        <p class="mt-4 text-gray-500">
+            Generate QR Code within seconds.
+        </p>
 
-                for Images
+    </div>
 
-            </h1>
+    <div class="bg-white rounded-xl shadow p-8">
 
-            <p class="text-xl text-gray-500 mt-6">
+        <h2 class="text-2xl font-semibold">
+            🔒 Secure Hosting
+        </h2>
 
-                Upload your image and get a permanent QR Code instantly.
+        <p class="mt-4 text-gray-500">
+            Your images are safely stored.
+        </p>
 
-            </p>
+    </div>
 
-            <button class="mt-10 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl">
+    <div class="bg-white rounded-xl shadow p-8">
 
-                Upload Image
+        <h2 class="text-2xl font-semibold">
+            🌍 Permanent Link
+        </h2>
 
-            </button>
+        <p class="mt-4 text-gray-500">
+            Share your image anywhere.
+        </p>
 
-        </div>
+    </div>
 
-    </section>
-    <section class="grid md:grid-cols-3 gap-8 mt-20">
+</section>
 
-        <div class="bg-white rounded-xl shadow p-8">
+<section class="max-w-4xl mx-auto mt-20 px-6">
 
-            <h2 class="text-2xl font-semibold">
+    <div id="drop-zone"
+        class="border-4 border-dashed border-blue-300 rounded-3xl p-16 bg-white text-center">
 
-                ⚡ Instant QR
+        <h2 class="text-3xl font-bold">
 
-            </h2>
+            Drag & Drop Image
 
-            <p class="mt-4 text-gray-500">
+        </h2>
 
-                Generate QR Code within seconds.
+        <p class="mt-4 text-gray-500">
 
-            </p>
+            or choose from your computer
 
-        </div>
+        </p>
 
-        <div class="bg-white rounded-xl shadow p-8">
+        <form
+            id="upload-form"
+            enctype="multipart/form-data">
 
-            <h2 class="text-2xl font-semibold">
+            <input
+                type="file"
+                id="image-input"
+                name="image"
+                accept="image/png,image/jpeg,image/webp"
+                class="hidden">
 
-                🔒 Secure Hosting
-
-            </h2>
-
-            <p class="mt-4 text-gray-500">
-
-                Your images are safely stored.
-
-            </p>
-
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-8">
-
-            <h2 class="text-2xl font-semibold">
-
-                🌍 Permanent Link
-
-            </h2>
-
-            <p class="mt-4 text-gray-500">
-
-                Share your image anywhere.
-
-            </p>
-
-        </div>
-
-    </section>
-    <section class="mt-24">
-
-        <div id="drop-zone"
-            class="border-4 border-dashed border-blue-300 rounded-3xl p-16 bg-white text-center transition hover:border-blue-500">
-
-            <h2 class="text-3xl font-bold">
-
-                Drag & Drop Image
-
-            </h2>
-
-            <p class="mt-4 text-gray-500">
-
-                or choose from your computer
-
-            </p>
-
-            <input type="file" id="image-input" accept="image/png,image/jpeg,image/webp" class="hidden">
-
-            <button id="choose-btn" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
+            <button
+                type="button"
+                id="choose-btn"
+                class="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
 
                 Choose Image
 
             </button>
 
-        </div>
+            <button
+                type="submit"
+                class="mt-4 ml-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl">
 
-    </section>
+                Upload
 
-    <div class="mt-10 hidden" id="preview-container">
+            </button>
 
-        <img id="preview-image" class="rounded-xl shadow-lg max-h-96 mx-auto">
-
-        <button id="remove-btn" class="mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-xl">
-
-            Remove Image
-
-        </button>
+        </form>
 
     </div>
 
-    {% endblock %}
-</body>
+</section>
 
-</html>
+<div
+    id="preview-container"
+    class="hidden max-w-3xl mx-auto mt-10">
+
+    <img
+        id="preview-image"
+        class="rounded-xl shadow-lg max-h-96 mx-auto">
+
+    <button
+        id="remove-btn"
+        class="mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-xl">
+
+        Remove Image
+
+    </button>
+
+</div>
+
+{% endblock %}

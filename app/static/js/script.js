@@ -53,3 +53,46 @@ removeBtn.addEventListener("click", () => {
     previewContainer.classList.add("hidden");
 
 });
+
+const uploadForm = document.getElementById("upload-form");
+
+uploadForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const file = imageInput.files[0];
+
+    if (!file) {
+        alert("Please select an image first.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+
+        const response = await fetch("/upload", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        console.log(data);
+
+        if (data.success) {
+            alert("✅ Image uploaded successfully!");
+            console.log(data.filename);
+        } else {
+            alert("❌ " + data.message);
+        }
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Something went wrong.");
+
+    }
+
+});
