@@ -11,19 +11,121 @@
 </head>
 
 <body>
-{% extends "base.html" %}
+    {% extends "base.html" %}
 
-{% block title %}
-Home
-{% endblock %}
+    {% block title %}
 
-{% block content %}
+    SnapQR
 
-<h1>Welcome to SnapQR</h1>
+    {% endblock %}
 
-<p>Dynamic QR Image Hosting Platform</p>
+    {% block content %}
 
-{% endblock %}
+    <section class="max-w-7xl mx-auto px-6 py-20">
+
+        <div class="text-center">
+
+            <h1 class="text-6xl font-bold text-slate-800">
+
+                Generate QR Codes
+
+                for Images
+
+            </h1>
+
+            <p class="text-xl text-gray-500 mt-6">
+
+                Upload your image and get a permanent QR Code instantly.
+
+            </p>
+
+            <button class="mt-10 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl">
+
+                Upload Image
+
+            </button>
+
+        </div>
+
+    </section>
+    <section class="grid md:grid-cols-3 gap-8 mt-20">
+
+        <div class="bg-white rounded-xl shadow p-8">
+
+            <h2 class="text-2xl font-semibold">
+
+                ⚡ Instant QR
+
+            </h2>
+
+            <p class="mt-4 text-gray-500">
+
+                Generate QR Code within seconds.
+
+            </p>
+
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-8">
+
+            <h2 class="text-2xl font-semibold">
+
+                🔒 Secure Hosting
+
+            </h2>
+
+            <p class="mt-4 text-gray-500">
+
+                Your images are safely stored.
+
+            </p>
+
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-8">
+
+            <h2 class="text-2xl font-semibold">
+
+                🌍 Permanent Link
+
+            </h2>
+
+            <p class="mt-4 text-gray-500">
+
+                Share your image anywhere.
+
+            </p>
+
+        </div>
+
+    </section>
+    <section class="mt-24">
+
+        <div class="border-4 border-dashed border-blue-300 rounded-3xl p-16 bg-white text-center">
+
+            <h2 class="text-3xl font-bold">
+
+                Drag & Drop Image
+
+            </h2>
+
+            <p class="mt-4 text-gray-500">
+
+                or click below
+
+            </p>
+
+            <button class="mt-8 bg-blue-600 text-white px-6 py-3 rounded-xl">
+
+                Choose Image
+
+            </button>
+
+        </div>
+
+    </section>
+
+    {% endblock %}
 </body>
 
 </html>

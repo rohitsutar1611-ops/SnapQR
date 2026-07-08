@@ -1,20 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}SnapQR{% endblock %}</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
 
-{% block content %}
+<body class="bg-slate-100 font-[Inter]">
 
-{% endblock %}
+    <nav class="bg-white shadow-sm">
 
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <h1 class="text-2xl font-bold text-blue-600">
+
+                SnapQR
+
+            </h1>
+
+            <div class="space-x-8">
+
+                <a href="#" class="text-gray-700 hover:text-blue-600">Home</a>
+
+                <a href="#" class="text-gray-700 hover:text-blue-600">Features</a>
+
+                <a href="#" class="text-gray-700 hover:text-blue-600">About</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    {% block content %}
+
+    <footer class="bg-white mt-20 shadow-inner">
+
+        <div class="max-w-7xl mx-auto px-6 py-8 text-center">
+
+            <p class="text-gray-500">
+
+                © 2026 SnapQR
+
+            </p>
+
+        </div>
+
+    </footer>
+
+    {% endblock %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
+
 </html>
