@@ -101,7 +101,8 @@
     </section>
     <section class="mt-24">
 
-        <div class="border-4 border-dashed border-blue-300 rounded-3xl p-16 bg-white text-center">
+        <div id="drop-zone"
+            class="border-4 border-dashed border-blue-300 rounded-3xl p-16 bg-white text-center transition hover:border-blue-500">
 
             <h2 class="text-3xl font-bold">
 
@@ -111,11 +112,13 @@
 
             <p class="mt-4 text-gray-500">
 
-                or click below
+                or choose from your computer
 
             </p>
 
-            <button class="mt-8 bg-blue-600 text-white px-6 py-3 rounded-xl">
+            <input type="file" id="image-input" accept="image/png,image/jpeg,image/webp" class="hidden">
+
+            <button id="choose-btn" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
 
                 Choose Image
 
@@ -124,6 +127,18 @@
         </div>
 
     </section>
+
+    <div class="mt-10 hidden" id="preview-container">
+
+        <img id="preview-image" class="rounded-xl shadow-lg max-h-96 mx-auto">
+
+        <button id="remove-btn" class="mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-xl">
+
+            Remove Image
+
+        </button>
+
+    </div>
 
     {% endblock %}
 </body>
