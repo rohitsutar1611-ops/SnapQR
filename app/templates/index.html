@@ -6,15 +6,16 @@ SnapQR
 
 {% block content %}
 
-<section class="max-w-7xl mx-auto px-6 py-20">
+<section class="max-w-7xl mx-auto px-6 py-24 text-center">
 
     <div class="text-center">
 
-        <h1 class="text-6xl font-bold text-slate-800">
+        <h1
+            class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 bg-clip-text text-transparent">
             Generate QR Codes for Images
         </h1>
 
-        <p class="text-xl text-gray-500 mt-6">
+        <p class="text-xl text-gray-500 mt-6 max-w-3xl mx-auto">
             Upload your image and get a permanent QR Code instantly.
         </p>
 
@@ -24,7 +25,10 @@ SnapQR
 
 <section class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto px-6">
 
-    <div class="bg-white rounded-xl shadow p-8">
+    <div class="bg-white rounded-xl shadow p-8 hover:-translate-y-2
+hover:shadow-xl
+transition-all
+duration-300">
 
         <h2 class="text-2xl font-semibold">
             ⚡ Instant QR
@@ -36,7 +40,10 @@ SnapQR
 
     </div>
 
-    <div class="bg-white rounded-xl shadow p-8">
+    <div class="bg-white rounded-xl shadow p-8 hover:-translate-y-2
+hover:shadow-xl
+transition-all
+duration-300">
 
         <h2 class="text-2xl font-semibold">
             🔒 Secure Hosting
@@ -48,7 +55,10 @@ SnapQR
 
     </div>
 
-    <div class="bg-white rounded-xl shadow p-8">
+    <div class="bg-white rounded-xl shadow p-8 hover:-translate-y-2
+hover:shadow-xl
+transition-all
+duration-300">
 
         <h2 class="text-2xl font-semibold">
             🌍 Permanent Link
@@ -65,7 +75,7 @@ SnapQR
 <section class="max-w-4xl mx-auto mt-20 px-6">
 
     <div id="drop-zone"
-        class="border-4 border-dashed border-blue-300 rounded-3xl p-16 bg-white text-center">
+        class="border-4 border-dashed border-blue-300 rounded-3xl p-16 bg-white text-center shadow-xl hover:shadow-2xl transition-all duration-300">
 
         <h2 class="text-3xl font-bold">
 
@@ -79,33 +89,36 @@ SnapQR
 
         </p>
 
-        <form
-            id="upload-form"
-            enctype="multipart/form-data">
+        <form id="upload-form" enctype="multipart/form-data">
 
-            <input
-                type="file"
-                id="image-input"
-                name="image"
-                accept="image/png,image/jpeg,image/webp"
-                class="hidden">
+            <input type="file" id="image-input" name="image" accept="image/png,image/jpeg,image/webp" class="hidden">
 
-            <button
-                type="button"
-                id="choose-btn"
-                class="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
+            <button type="button" id="choose-btn"
+                class="bg-blue-600 hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 ...">
 
                 Choose Image
 
             </button>
 
-            <button
-                type="submit"
-                class="mt-4 ml-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl">
-
+            <button id="upload-btn" type="submit"
+                class="bg-blue-600 hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 ...">
                 Upload
-
             </button>
+            <div id="loading" class="hidden mt-6">
+
+                <div class="flex items-center justify-center gap-3">
+
+                    <div class="animate-spin rounded-full h-6 w-6 border-4 border-blue-500 border-t-transparent"></div>
+
+                    <span class="text-blue-600 font-semibold">
+
+                        Uploading Image...
+
+                    </span>
+
+                </div>
+
+            </div>
 
         </form>
 
@@ -113,41 +126,121 @@ SnapQR
 
 </section>
 
-<div
-    id="preview-container"
-    class="hidden max-w-3xl mx-auto mt-10">
+<div id="preview-container" class="hidden max-w-3xl mx-auto mt-10">
 
-    <img
-        id="preview-image"
-        class="rounded-xl shadow-lg max-h-96 mx-auto">
+    <img id="preview-image" class="rounded-xl shadow-lg max-h-96 mx-auto">
 
-    <button
-        id="remove-btn"
-        class="mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-xl">
+    <button id="remove-btn"
+        class="bg-blue-600 hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 ...">
 
         Remove Image
 
     </button>
 
 </div>
-<div id="qr-result" class="hidden mt-10 text-center">
+<div id="qr-result" class="hidden opacity-0 translate-y-10 transition-all duration-700 max-w-3xl mx-auto mt-12">
 
-    <h2 class="text-3xl font-bold mb-6">
-        QR Generated Successfully
-    </h2>
+    <div
+        class="bg-white rounded-3xl shadow-2xl border border-slate-200 p-8 transition-all duration-500 hover:shadow-blue-200">
 
-    <img
-        id="qr-image"
-        class="mx-auto w-72 rounded-xl shadow-lg"
-    >
+        <h2 class="text-3xl font-bold text-center text-slate-800">
+            🎉 QR Generated Successfully
+        </h2>
 
-    <a
-        id="download-btn"
-        class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl"
-        download
-    >
-        Download QR
-    </a>
+        <p class="text-center text-gray-500 mt-2">
+            Your image is ready to share.
+        </p>
+
+        <!-- QR -->
+        <div class="mt-8 flex justify-center">
+
+            <img id="qr-image" class="w-72 rounded-2xl shadow-lg border p-4 bg-white">
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+
+            <a id="download-btn" download
+                class="bg-blue-600 hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 ...">
+
+                ⬇ Download QR
+
+            </a>
+
+            <button id="new-qr-btn"
+                class="bg-blue-600 hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 ...">
+
+                🔄 Generate Another QR
+
+            </button>
+
+            <button id="copy-url-btn"
+                class="bg-blue-600 hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 ...">
+
+                📋 Copy Image URL
+
+            </button>
+
+            <a id="open-image-btn" target="_blank"
+                class="bg-blue-600 hover:bg-blue-700 hover:scale-105 active:scale-95 transition duration-300 ...">
+
+                🌐 Open Image
+
+            </a>
+
+        </div>
+
+        <!-- Information -->
+        <div class="grid md:grid-cols-3 gap-6 mt-10">
+
+            <div class="bg-slate-100 rounded-xl p-4 text-center">
+
+                <h3 class="font-semibold text-slate-700">
+                    File Name
+                </h3>
+
+                <p id="file-name" class="mt-2 text-gray-600 break-all">
+                    -
+                </p>
+
+            </div>
+
+            <div class="bg-slate-100 rounded-xl p-4 text-center">
+
+                <h3 class="font-semibold text-slate-700">
+                    Status
+                </h3>
+
+                <p class="mt-2 text-green-600 font-semibold">
+                    Uploaded Successfully
+                </p>
+
+            </div>
+
+            <div class="bg-slate-100 rounded-xl p-4 text-center">
+
+                <h3 class="font-semibold text-slate-700">
+                    Uploaded At
+                </h3>
+
+                <p id="upload-time" class="mt-2 text-gray-600">
+                    -
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="toast"
+    class="hidden fixed top-6 right-6 bg-green-600 text-white px-6 py-4 rounded-xl shadow-2xl z-50 transition-all duration-300">
+
+    <span id="toast-message">
+        Success
+    </span>
 
 </div>
 {% endblock %}
