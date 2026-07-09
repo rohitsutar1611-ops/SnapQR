@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-
+from flask import url_for
 from app.services.image_service import save_uploaded_image
 
 upload = Blueprint("upload", __name__)
@@ -29,8 +29,18 @@ def upload_image():
             "message": result
         }), 400
 
+    # Debug
+    #print("Cloud URL:", result["cloud_url"])
+
     return jsonify({
-        "success": True,
-        "filename": result,
-        "message": "Image uploaded successfully."
-    })
+    "success": True,
+    "filename": result["filename"],
+    "image_url": result["image_url"],
+    "qr_filename": result["qr_filename"],
+    "qr_url": url_for(
+        "static",
+        filename=f"qr_codes/{result['qr_filename']}"
+        
+    ),
+    "message": "QR Generated Successfully!"
+})

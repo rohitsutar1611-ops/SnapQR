@@ -1,60 +1,89 @@
 console.log("SnapQR script loaded successfully.");
 
+// ===============================
+// Elements
+// ===============================
+
 const chooseBtn = document.getElementById("choose-btn");
 const imageInput = document.getElementById("image-input");
+
 const previewContainer = document.getElementById("preview-container");
 const previewImage = document.getElementById("preview-image");
 const removeBtn = document.getElementById("remove-btn");
 
-// Allowed image types
+const uploadForm = document.getElementById("upload-form");
+
+const qrResult = document.getElementById("qr-result");
+const qrImage = document.getElementById("qr-image");
+const downloadBtn = document.getElementById("download-btn");
+
+// ===============================
+// Allowed File Types
+// ===============================
+
 const allowed = [
     "image/png",
     "image/jpeg",
     "image/webp"
 ];
 
-// Open file picker
+// ===============================
+// Choose Image
+// ===============================
+
 chooseBtn.addEventListener("click", () => {
     imageInput.click();
 });
 
-// Image selected
+// ===============================
+// Preview Image
+// ===============================
+
 imageInput.addEventListener("change", () => {
 
     const file = imageInput.files[0];
 
     if (!file) return;
 
-    // File type validation
+    // Validate Type
     if (!allowed.includes(file.type)) {
         alert("Only PNG, JPG and WEBP images are allowed.");
         imageInput.value = "";
         return;
     }
 
-    // File size validation (5 MB)
+    // Validate Size
     if (file.size > 5 * 1024 * 1024) {
         alert("Maximum file size is 5 MB.");
         imageInput.value = "";
         return;
     }
 
-    // Show preview
     previewContainer.classList.remove("hidden");
+
     previewImage.src = URL.createObjectURL(file);
 
 });
 
-// Remove image
+// ===============================
+// Remove Image
+// ===============================
+
 removeBtn.addEventListener("click", () => {
 
     imageInput.value = "";
+
     previewImage.src = "";
+
     previewContainer.classList.add("hidden");
+
+    qrResult.classList.add("hidden");
 
 });
 
-const uploadForm = document.getElementById("upload-form");
+// ===============================
+// Upload Image
+// ===============================
 
 uploadForm.addEventListener("submit", async (e) => {
 
@@ -68,13 +97,17 @@ uploadForm.addEventListener("submit", async (e) => {
     }
 
     const formData = new FormData();
+
     formData.append("image", file);
 
     try {
 
         const response = await fetch("/upload", {
+
             method: "POST",
+
             body: formData
+
         });
 
         const data = await response.json();
@@ -82,16 +115,39 @@ uploadForm.addEventListener("submit", async (e) => {
         console.log(data);
 
         if (data.success) {
-            alert("✅ Image uploaded successfully!");
-            console.log(data.filename);
-        } else {
-            alert("❌ " + data.message);
+
+            // Success Message
+            alert(data.message);
+
+            // Console Logs
+            console.log("Image URL:", data.image_url);
+            console.log("QR URL:", data.qr_url);
+            console.log("Filename:", data.filename);
+
+            // Show QR Section
+            qrResult.classList.remove("hidden");
+
+            // Show QR Image
+            qrImage.src = data.qr_url;
+
+            // Download Button
+            downloadBtn.href = data.qr_url;
+
         }
 
-    } catch (error) {
+        else {
+
+            alert(data.message);
+
+        }
+
+    }
+
+    catch (error) {
 
         console.error(error);
-        alert("Something went wrong.");
+
+        alert("Something went wrong while uploading.");
 
     }
 

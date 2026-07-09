@@ -1,10 +1,11 @@
 import os
 import uuid
-
+from flask import url_for
 from flask import current_app
 from werkzeug.utils import secure_filename
-
+from app.services.qr_service import generate_qr
 from app.utils.helpers import allowed_file
+from app.services.cloudinary_service import upload_to_cloudinary
 
 
 def save_uploaded_image(file):
@@ -29,4 +30,18 @@ def save_uploaded_image(file):
 
     file.save(filepath)
 
-    return True, filename
+    
+
+    image_url = url_for(
+        "static",
+        filename=f"uploads/{filename}",
+        _external=True
+    )
+
+    qr_filename = generate_qr(image_url)
+    
+    return True, {
+    "filename": filename,
+    "image_url": image_url,
+    "qr_filename": qr_filename
+}
