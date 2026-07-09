@@ -19,29 +19,52 @@
 
 <body class="bg-slate-100 font-[Inter]">
 
-    <nav class="bg-white shadow-sm">
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm">
 
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-            <h1 class="text-2xl font-bold text-blue-600">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3">
 
-                SnapQR
-
-            </h1>
-
-            <div class="space-x-8">
-
-                <a href="#">Home</a>
-
-                <a href="#">Features</a>
-
-                <a href="#">About</a>
-
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center text-white text-xl">
+                📷
             </div>
+
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">
+                    SnapQR
+                </h1>
+
+                <p class="text-xs text-slate-500">
+                    Instant Image QR Generator
+                </p>
+            </div>
+
+        </a>
+
+        <!-- Navigation -->
+        <div class="flex items-center gap-8">
+
+            <a href="#"
+               class="text-slate-600 hover:text-blue-600 transition font-medium">
+                Home
+            </a>
+
+            <a href="#features"
+               class="text-slate-600 hover:text-blue-600 transition font-medium">
+                Features
+            </a>
+
+            <a href="#upload"
+               class="text-slate-600 hover:text-blue-600 transition font-medium">
+                Upload
+            </a>
 
         </div>
 
-    </nav>
+    </div>
+
+</nav>
 
     {% block content %}
     {% endblock %}
