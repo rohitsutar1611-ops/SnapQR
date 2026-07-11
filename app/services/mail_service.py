@@ -1,26 +1,23 @@
-import smtplib
-
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import resend
 
 from flask import current_app
 
 
 def send_contact_email(name, email, subject, message):
 
-    sender = current_app.config["EMAIL_ADDRESS"]
+    resend.api_key = current_app.config["RESEND_API_KEY"]
 
-    password = current_app.config["EMAIL_PASSWORD"]
+    try:
 
-    receiver = sender
+        resend.Emails.send({
 
-    mail = MIMEMultipart()
+            "from": "SnapQR <onboarding@resend.dev>",
 
-    mail["From"] = sender
-    mail["To"] = receiver
-    mail["Subject"] = f"SnapQR Contact : {subject}"
+            "to": current_app.config["EMAIL_ADDRESS"],
 
-    body = f"""
+            "subject": f"SnapQR Contact : {subject}",
+
+            "text": f"""
 New Contact Form Submission
 
 Name:
@@ -36,19 +33,7 @@ Message:
 {message}
 """
 
-    mail.attach(MIMEText(body, "plain"))
-
-    try:
-
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-
-        server.starttls()
-
-        server.login(sender, password)
-
-        server.send_message(mail)
-
-        server.quit()
+        })
 
         return True
 

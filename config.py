@@ -30,3 +30,5 @@ class Config:
     EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 
     EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+
+    RESEND_API_KEY = os.getenv("RESEND_API_KEY")
