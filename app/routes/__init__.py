@@ -1,2 +1,2 @@
-from .home import main
+from .home import home
 from .upload import upload

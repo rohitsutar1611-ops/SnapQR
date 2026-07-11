@@ -1,9 +1,34 @@
-from flask import Flask 
+from flask import Flask, render_template
+
 from config import Config
-from .routes import main, upload
+
+from app.logger import setup_logger
+from app.cloudinary_config import configure_cloudinary
+
+from app.routes.home import home
+from app.routes.upload import upload
+from app.routes.pages import pages
+from app.routes.contact import contact
+
 def create_app():
+
     app = Flask(__name__)
+
     app.config.from_object(Config)
-    app.register_blueprint(main)
+
+    setup_logger()
+
+    with app.app_context():
+        configure_cloudinary()
+
+    app.register_blueprint(home)
     app.register_blueprint(upload)
+    app.register_blueprint(pages)
+    app.register_blueprint(contact)
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+
+        return render_template("404.html"), 404
+
     return app

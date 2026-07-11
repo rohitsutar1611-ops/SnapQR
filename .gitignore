@@ -1,13 +1,10 @@
 venv/
+.env
 
 __pycache__/
 
 *.pyc
 
-.env
+app/static/uploads/*
 
-instance/
-
-uploads/
-
-qr_codes/
+app/static/qr_codes/*

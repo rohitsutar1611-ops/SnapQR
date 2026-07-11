@@ -14,13 +14,19 @@ def configure_cloudinary():
     )
 
 
-def upload_to_cloudinary(filepath):
+def upload_to_cloudinary(file):
 
-    configure_cloudinary()
+    try:
 
-    result = cloudinary.uploader.upload(
-        filepath,
-        folder="snapqr"
-    )
+        configure_cloudinary()
 
-    return result["secure_url"]
+        result = cloudinary.uploader.upload(
+            file,
+            folder="snapqr"
+        )
+
+        return True, result["secure_url"]
+
+    except Exception as e:
+
+        return False, str(e)

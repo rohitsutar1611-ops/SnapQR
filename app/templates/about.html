@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}
+About | SnapQR
+{% endblock %}
+
+{% block content %}
+
+<section class="max-w-6xl mx-auto px-6 py-20">
+
+    <div class="text-center">
+
+        <h1 class="text-5xl font-bold text-slate-800">
+            About SnapQR
+        </h1>
+
+        <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
+            SnapQR is a modern Flask-based web application that lets users upload
+            an image and instantly generate a QR Code linked to that image.
+        </p>
+
+    </div>
+
+</section>
+
+<section class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+
+        <h2 class="text-2xl font-bold text-blue-600">
+            🚀 Our Mission
+        </h2>
+
+        <p class="mt-4 text-gray-600 leading-8">
+            Our mission is to make image sharing fast, simple and accessible using
+            QR technology. Upload once and share anywhere.
+        </p>
+
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+
+        <h2 class="text-2xl font-bold text-green-600">
+            ⚡ Why SnapQR?
+        </h2>
+
+        <ul class="mt-4 space-y-3 text-gray-600">
+
+            <li>✔ Instant QR Generation</li>
+            <li>✔ Secure Image Upload</li>
+            <li>✔ Permanent Image Links</li>
+            <li>✔ Clean & Responsive Design</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-20">
+
+    <div class="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl text-white p-10 text-center">
+
+        <h2 class="text-4xl font-bold">
+
+            Built using Flask + Tailwind CSS
+
+        </h2>
+
+        <p class="mt-4 text-lg">
+
+            SnapQR demonstrates image upload,
+            QR generation,
+            responsive UI,
+            Cloud integration
+            and clean Flask architecture.
+
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

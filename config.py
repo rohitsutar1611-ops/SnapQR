@@ -5,7 +5,10 @@ load_dotenv()
 
 class Config:
 
-    SECRET_KEY = "snapqr-secret-key"
+    SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "snapqr-secret-key"
+)
 
     UPLOAD_FOLDER = os.path.join("app", "static", "uploads")
 
@@ -23,3 +26,7 @@ class Config:
     CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
 
     CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
+
+    EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+
+    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")

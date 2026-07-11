@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+404 | SnapQR
+{% endblock %}
+
+{% block content %}
+
+<section class="min-h-[70vh] flex items-center justify-center px-6">
+
+    <div class="text-center">
+
+        <h1 class="text-8xl font-extrabold text-blue-600">
+            404
+        </h1>
+
+        <h2 class="mt-6 text-4xl font-bold text-slate-800">
+            Oops! Page Not Found
+        </h2>
+
+        <p class="mt-4 text-gray-500 max-w-xl mx-auto">
+
+            The page you're looking for doesn't exist or may have been moved.
+
+        </p>
+
+        <a href="/"
+           class="inline-block mt-10 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl transition duration-300 hover:scale-105">
+
+            🏠 Back to Home
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
