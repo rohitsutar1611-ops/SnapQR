@@ -8,7 +8,7 @@ from app.cloudinary_config import configure_cloudinary
 from app.routes.home import home
 from app.routes.upload import upload
 from app.routes.pages import pages
-from app.routes.contact import contact
+
 
 def create_app():
 
@@ -24,7 +24,7 @@ def create_app():
     app.register_blueprint(home)
     app.register_blueprint(upload)
     app.register_blueprint(pages)
-    app.register_blueprint(contact)
+    
 
     @app.errorhandler(404)
     def page_not_found(error):
