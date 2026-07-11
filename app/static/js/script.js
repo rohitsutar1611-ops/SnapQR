@@ -393,10 +393,9 @@ const uploadTime = document.getElementById("upload-time");
 const toast = document.getElementById("toast");
 const toastMessage = document.getElementById("toast-message");
 
-// Contact Page
 
-const contactForm = document.getElementById("contact-form");
-const sendBtn = document.getElementById("send-btn");
+
+
 
 // =======================================
 // Allowed Types
@@ -762,112 +761,6 @@ if (newQrBtn) {
         resetApp();
 
         showToast("Ready for another upload.");
-
-    });
-
-}
-// =======================================
-// Contact Form
-// =======================================
-
-if (contactForm) {
-
-    contactForm.addEventListener("submit", async (e) => {
-
-        e.preventDefault();
-
-        const name =
-            document.getElementById("name").value.trim();
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const subject =
-            document.getElementById("subject").value.trim();
-
-        const message =
-            document.getElementById("message").value.trim();
-
-        if (!name || !email || !subject || !message) {
-
-            showToast("Please fill all fields.");
-
-            return;
-
-        }
-
-        sendBtn.disabled = true;
-
-        sendBtn.innerText = "Sending...";
-
-        sendBtn.classList.add(
-            "opacity-60",
-            "cursor-not-allowed"
-        );
-
-        try {
-
-            const response = await fetch("/api/contact", {
-
-                method: "POST",
-
-                headers: {
-
-                    "Content-Type": "application/json"
-
-                },
-
-                body: JSON.stringify({
-
-                    name,
-                    email,
-                    subject,
-                    message
-
-                })
-
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-
-                showToast(data.message);
-
-                contactForm.reset();
-
-                document.getElementById("name").focus();
-
-            }
-
-            else {
-
-                showToast(data.message);
-
-            }
-
-        }
-
-        catch (error) {
-
-            console.error(error);
-
-            showToast("Something went wrong.");
-
-        }
-
-        finally {
-
-            sendBtn.disabled = false;
-
-            sendBtn.innerText = "Send Message";
-
-            sendBtn.classList.remove(
-                "opacity-60",
-                "cursor-not-allowed"
-            );
-
-        }
 
     });
 
